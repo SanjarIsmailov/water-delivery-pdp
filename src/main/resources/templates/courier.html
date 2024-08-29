@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Courier Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <a href="/admin"><h1 class="mb-4 text-black">Courier Management</h1></a>
+
+    <!-- Form for adding or editing a courier -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 th:if="${courier.id == null}">Add Courier</h2>
+            <h2 th:if="${courier.id != null}">Edit Courier</h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{${courier.id == null ? '/courier/add' : '/courier/update'}}" th:object="${courier}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                </div>
+                <div class="form-group">
+                    <label for="carType">Car Type:</label>
+                    <input type="text" class="form-control" id="carType" th:field="*{carType}" required>
+                </div>
+                <div class="form-group">
+                    <label for="carNumber">Car Number:</label>
+                    <input type="text" class="form-control" id="carNumber" th:field="*{carNumber}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
+                </div>
+                <button type="submit" class="btn btn-primary" th:text="${courier.id == null ? 'Add Courier' : 'Update Courier'}"></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- List of couriers -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Couriers</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Car Type</th>
+                    <th>Car Number</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="courier : ${couriers}">
+                    <td th:text="${courier.name}"></td>
+                    <td th:text="${courier.carType}"></td>
+                    <td th:text="${courier.carNumber}"></td>
+                    <td th:text="${courier.phoneNumber}"></td>
+                    <td>
+                        <!-- Form for editing a courier -->
+                        <form th:action="@{/courier/edit}" method="get" class="d-inline">
+                            <input type="hidden" name="id" th:value="${courier.id}">
+                            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                        </form>
+                        <!-- Form for deleting a courier -->
+                        <form th:action="@{/courier/delete}" method="post" class="d-inline">
+                            <input type="hidden" name="id" th:value="${courier.id}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
