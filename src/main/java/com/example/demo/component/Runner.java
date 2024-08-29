@@ -47,9 +47,8 @@ public class Runner implements CommandLineRunner {
             courierRepository.saveAll(List.of(
                     new Courier(null,"Eshmat","Damas","01|712PPP", "+998991234567"),
                     new Courier(null,"Toshmat","Labo","01|A717AA", "+998931234567"),
-                    new Courier(null,"Hikmat","Gruzovik","01|701 UZB", "+998941234567"),
-                    new Courier(UUID.randomUUID(), "Sanjar", "Gelik", "01|B888BB", "+998935592299")
-            ));
+                    new Courier(null,"Hikmat","Gruzovik","01|701 UZB", "+998941234567")
+                    ));
         }
 
     }
