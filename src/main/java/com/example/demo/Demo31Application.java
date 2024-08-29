@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class WaterDeliveryPdpApplication {
+public class Demo31Application {
 
     @Value("${bot.token}")
     private String token;
 
     public static void main(String[] args) {
-        SpringApplication.run(WaterDeliveryPdpApplication.class, args);
+        SpringApplication.run(Demo31Application.class, args);
     }
 
     @Bean
@@ -26,7 +26,5 @@ public class WaterDeliveryPdpApplication {
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
-
-
 
 }
